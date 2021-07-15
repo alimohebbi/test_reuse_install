@@ -43,6 +43,14 @@ Follow instructions for [installation](http://star-rep.inf.usi.ch/Mohebbi/test_r
 1. Download the latest version of [ATM](https://drive.google.com/file/d/1T75IhV4AGRzFU7cjeE4xOpKwcGBXwzCC/view?usp=sharing)
 1. Replace modified donar test cases
 1. Rename the `linux_run.sh` to `run_AppTestMigrator.sh`
+1. You need to change ip address of host if the emulator is not Genymotion. 
+    The emulator uses the that to connect to the Neo4j
+    - nano ATM-Modified/Matching/app/src/androidTest/java/app/test/migrator/matching/EventMatching.java
+    - Go to line 1612 (ctrl + -)
+    - change the ip address to `10.0.2.2`
+1. If the port of Neo4j is changed use the same line to change the port.
+
+> Use 10.0.2.2 for default AVD and 10.0.3.2 for Genymotion
 
 ## Runner project
 1. Clone [ATM runner](http://star-rep.inf.usi.ch/Mohebbi/atm_runner)
