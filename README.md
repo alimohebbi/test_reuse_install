@@ -6,7 +6,7 @@ Please use two different directories:
 
 # Install SDK and Emulator
 
-Follow instructions for [installation](http://star-rep.inf.usi.ch/Mohebbi/test_reuse_install/blob/master/SDK_Install.md).
+Follow instructions for [SDK Installation](http://star-rep.inf.usi.ch/Mohebbi/test_reuse_install/blob/master/SDK_Install.md).
 
 
 
