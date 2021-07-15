@@ -6,7 +6,7 @@ Please use two different directories:
 
 # Install SDK and Emulator
 
-Follow instructions for [installation](http://star-rep.inf.usi.ch/Mohebbi/test_reuse_install/blob/master/SDK_Install.md)
+Follow instructions for [installation](http://star-rep.inf.usi.ch/Mohebbi/test_reuse_install/blob/master/SDK_Install.md).
 
 
 
@@ -19,7 +19,7 @@ Follow instructions for [installation](http://star-rep.inf.usi.ch/Mohebbi/test_r
 
 # ATM
 ## Neo4j
-1. Set java version to 11
+1. Set java version to 11. Look at [JAVA Installation](http://star-rep.inf.usi.ch/Mohebbi/test_reuse_install/blob/master/java_Install.md)
 1. Download noe4j community server
 1. Follow `Neo4J server` instructions on the [link](http://star-rep.inf.usi.ch/star/Alexios-Stoupis/blob/master/AppTestMigrator/Neo4j.md). Ignore the request part.
 
@@ -49,7 +49,7 @@ Follow instructions for [installation](http://star-rep.inf.usi.ch/Mohebbi/test_r
 1. Modify confuguration file
 1. Add migrations to `migration.csv`
 1. Clean the result file
-2. Set java version to 8
+2. Set java version to 8. Look at [JAVA Installation](http://star-rep.inf.usi.ch/Mohebbi/test_reuse_install/blob/master/java_Install.md).
 1. Run
 1. Check result file
 1. Go to 6 until get migrated test for all migrated files
