@@ -21,7 +21,7 @@ Follow instructions for [installation](http://star-rep.inf.usi.ch/Mohebbi/test_r
 ## Neo4j
 1. Set java version to 11. Look at [JAVA Installation](http://star-rep.inf.usi.ch/Mohebbi/test_reuse_install/blob/master/java_Install.md)
 1. Download noe4j community server
-1. Follow `Neo4J server` instructions on the [link](http://star-rep.inf.usi.ch/star/Alexios-Stoupis/blob/master/AppTestMigrator/Neo4j.md). Ignore the request part.
+1. Follow `Neo4J server` instructions on the [Neo4j Installation](http://star-rep.inf.usi.ch/Mohebbi/test_reuse_install/blob/master/neo4j_Install.md). Ignore the request part.
 
 ## Install gradle
 1. Choose a version. Version 5.6.1 works fine.
