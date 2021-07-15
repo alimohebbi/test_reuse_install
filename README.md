@@ -19,23 +19,24 @@ Follow instructions for [installation](http://star-rep.inf.usi.ch/Mohebbi/test_r
 
 # ATM
 ## Neo4j
+1. Set java version to 11
 1. Download noe4j community server
 1. Follow `Neo4J server` instructions on the [link](http://star-rep.inf.usi.ch/star/Alexios-Stoupis/blob/master/AppTestMigrator/Neo4j.md). Ignore the request part.
 
 ## Install gradle
-- version 5.6.1 works fine
-- Run below commands
-```
-wget https://services.gradle.org/distributions/gradle-5.6.1 -bin.zip -P /tmp
-sudo unzip -d /opt/gradle /tmp/gradle-*.zip
-```
+1. Choose a version. Version 5.6.1 works fine.
+1. Run below commands
 
-- add to the environment
+    ```
+    wget https://services.gradle.org/distributions/gradle-5.6.1 -bin.zip -P /tmp
+    sudo unzip -d /opt/gradle /tmp/gradle-*.zip
+    ```
+1. add to the environment
 
-```
-export GRADLE_HOME=/opt/gradle/gradle-5.6.1
-export PATH=${GRADLE_HOME}/bin:${PATH}
-```
+    ```
+    export GRADLE_HOME=/opt/gradle/gradle-5.6.1
+    export PATH=${GRADLE_HOME}/bin:${PATH}
+    ```
 
 
 ## ATM main tool
@@ -48,9 +49,10 @@ export PATH=${GRADLE_HOME}/bin:${PATH}
 1. Modify confuguration file
 1. Add migrations to `migration.csv`
 1. Clean the result file
+2. Set java version to 8
 1. Run
 1. Check result file
-1. Go to 5 until get migrated test for all migrated files
+1. Go to 6 until get migrated test for all migrated files
 1. Evaluate the migrated results
 
 # Craftdriod
