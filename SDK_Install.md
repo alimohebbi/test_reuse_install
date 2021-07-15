@@ -1,3 +1,4 @@
+## SDK
 Download command line tools
 place it at $ANDROID_SDK_ROOT/cmdline-tools/latest
 
@@ -34,6 +35,8 @@ sdkmanager "platforms;android-23"
 sdkmanager "platforms;android-21"
 ```
 
+## Emulator
+
 you can see all packages as follow `sdkmanager --list`
 
 
@@ -47,6 +50,7 @@ sdkmanager --install "system-images;android-24;default;x86_64"
 
 Check the installation by `sdkmanager --list_installed`
 
+> **Uninstall a package**
 Uninstall by `sdkmanager --uninstall [image name]`
 
 Install build tools: They are necessary to build your Android apps
@@ -55,11 +59,9 @@ Install build tools: They are necessary to build your Android apps
 sdkmanager "build-tools;25.0.3"
 ```
 
-Find a proper device. "id: 9 or "Nexus 6P"" is ok.
-
+> Find a proper device. "id: 9 or "Nexus 6P"" is ok.
 ```
 avdmanager list devices
-
 ```
 
 Create an emulator
@@ -70,11 +72,10 @@ avdmanager create avd --name emulator1 --package "system-images;android-24;defau
 
 Run the emulator
 ```
-emulator -ports 5554,5555 -avd emulator1 -no-window -no-audio -partition-size
+emulator -ports 5554,5555 -avd emulator1 -no-window -no-audio -partition-size 5120
 ```
 
-If you want to delete an emulator:
-
+> If you want to delete an emulator:
 ```
 avdmanager delete avd -n [name of emulator]
 ```
