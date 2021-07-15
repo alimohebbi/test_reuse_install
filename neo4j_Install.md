@@ -1,3 +1,43 @@
+# Neo4J server  
+Server can be used without any desktop. Still web browser is accessible.
+
+### APOC plugin
+- get jar file from internet. It should be compatible with the version.
+- Put in $NEO4J_HOME/plugin
+- insert the two line of mange setting in $NEO4J_HOME/conf/neo4j.conf
+   
+    ````
+    apoc.import.file.enabled=true
+    apoc.import.file.use_neo4j_config=false
+    ````
+
+### Initialization
+- set java home to java 11
+- start the server $NEO4J_HOME/bin/neo4j [start/console]
+- set initial password 
+````
+# neo4j-admin set-initial-password <the password>
+neo4j-admin set-initial-password 1234
+````
+- change the password if necessary
+````
+# ALTER USER <username> SET PASSWORD '<password>';
+ALTER USER neo4j SET PASSWORD 'neo4j';
+````
+
+### Test
+For testing your database run `neotest.sh`.
+It should create a graph with 17 nodes & 24 relations. You need to have `db.json`file in same place as `neotest.sh`.
+Don't worry about removing them from db. ATM does it before creating new graph. 
+
+
+### Request 
+- `note`: For authentication you should encode <user>:<pass> to base 64
+- `note`: To send request to a database other than default you should send to 
+```
+localhost:7474/db/<database name>/tx/commit
+```
+
 # Neo4J Desktop Setup
 - create a project
 - create a local graph name "db" set password for example "1234""
@@ -24,30 +64,3 @@ Following command removes everything from db (Just in case if you need it). It c
 MATCH (n) DETACH DELETE n
 ````
 
-
-# Neo4J server  
-Server can be used without any desktop. Still web browser is accessible.
-
-### APOC plugin
-- get jar file from internet. It should be compatible with the version.
-- Put in $NEO4J_HOME/plugin
-- insert the two line of mange setting in $NEO4J_HOME/conf/neo4j.conf
-
-### Initialization
-- set java home to java 11
-- start the server $NEO4J_HOME/bin/neo4j [start/console]
-- set initial password 
-````
-neo4j-admin set-initial-password <the password>
-````
-- change the password if necessary
-````
-ALTER USER <username> SET PASSWORD '<password>';
-````
-
-### Request 
-- `note`: For authentication you should encode <user>:<pass> to base 64
-- `note`: To send request to a database other than default you should send to 
-```
-localhost:7474/db/<database name>/tx/commit
-```
