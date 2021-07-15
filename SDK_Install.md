@@ -1,4 +1,3 @@
-
 Download command line tools
 place it at $ANDROID_SDK_ROOT/cmdline-tools/latest
 
@@ -17,15 +16,13 @@ sdkmanager --licenses
 Set environment variables in ~/.bashrc
 
 ```
-ANDROID_SDK_ROOT = Path to your SDK folder
-ANDROID_HOME = The same as ANDROID_SDK_ROOT
+export ANDROID_SDK_ROOT = Path to your SDK folder
+export ANDROID_HOME = The same as ANDROID_SDK_ROOT
 ```
 
 Add to path variable
 
 ```
-ANDROID_SDK_ROOT=/opt/android-sdk
-ANDROID_HOME=/opt/android-sdk
 PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/emulator
 ```
 
@@ -36,31 +33,59 @@ sdkmanager "platforms;android-25"
 sdkmanager "platforms;android-23"
 sdkmanager "platforms;android-21"
 ```
-install image for emulator:
-you can see images by a command like `sdkmanager`
+
+you can see all packages as follow `sdkmanager --list`
+
+
+install an image for the emulator:
+
 
 ```
-sdkmanager [image name]
+# sdkmanager --install [image name]
+sdkmanager --install "system-images;android-24;default;x86_64"
 ```
 
-install build tools: These are necessary to build your Android apps
+Check the installation by `sdkmanager --list_installed`
+
+Uninstall by `sdkmanager --uninstall [image name]`
+
+Install build tools: They are necessary to build your Android apps
 
 ```
 sdkmanager "build-tools;25.0.3"
 ```
 
-create an emulator
+Find a proper device. "id: 9 or "Nexus 6P"" is ok.
+
 ```
-avdmanager create avd --name emulator1 --package "[image name]"
+avdmanager list devices
+
 ```
+
+Create an emulator
+```
+# avdmanager create avd --name [emulator name] --package "[image name] -d [device name or id]"
+avdmanager create avd --name emulator1 --package "system-images;android-24;default;x86_64" -d 9
+```
+
+Run the emulator
+```
+emulator -ports 5554,5555 -avd emulator1 -no-window -no-audio -partition-size
+```
+
+If you want to delete an emulator:
+
+```
+avdmanager delete avd -n [name of emulator]
+```
+
 ### Test the setup
+Check adb:
+```
 run adb server 
 adb start-server
+```
 
-run the emulator
-```
-emulator -ports 5554,5555 -avd emulator1 -no-window -no-audio 
-```
 
 For special cases you may need to run this once
 ```
