@@ -18,7 +18,7 @@ export ANDROID_HOME = The same as ANDROID_SDK_ROOT
 ```
 1. Add to path variable
 ```
-PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/emulator
+PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/emulator:$ANDROID_SDK_ROOT/build-tools/25.0.3/
 ```
 
 1. Install platfrom:The platform packages are required to compile your app for the specified API level
