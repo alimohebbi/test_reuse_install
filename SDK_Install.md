@@ -58,6 +58,10 @@ avdmanager list devices
 # avdmanager create avd --name [emulator name] --package "[image name] -d [device name or id]"
 avdmanager create avd --name emulator1 --package "system-images;android-24;default;x86_64" -d 9
 ```
+> You can see list of availabe avds by:
+```
+ avdmanager list avd
+```
 
 1. Run the emulator
 ```
