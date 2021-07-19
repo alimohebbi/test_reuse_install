@@ -5,6 +5,8 @@
 |Import container to a file as an image| docker import [file name.tar]||
 |Run a container | docker run [OPTIONS] IMAGE [COMMAND] [ARG...]| docker run --name=testreuse testreuse-v2 sleep infinity|
 |Go inside|docker exec -it [CONTAINER NAME] /bin/bash||
+|Remove image| docker rmi [IMAGE] | |
+|Remove container| docker rm [CONTAINER NAME]|
 
 ### Docker run options
 |Action|Option|Example|
