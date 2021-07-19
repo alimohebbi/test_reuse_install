@@ -15,5 +15,9 @@
 |Network, default is docker|--network|--network=host|
 |Mount a folder|-v [HOST_PATH]:[DEST_PATH]|-v /home/amohebbi/models:/root/models|
 |Deattach, Not seeing output|-d||
+|Expose a port| --expose|--expose=5554-5555 |
+|Map ports between host and a container|-p|  -p 5554-5555|
+|Give extended privileges to this container|--privileged||
+|Run devices inside the container without the --privileged flag|--device|--device=/dev/kvm |
 
 
