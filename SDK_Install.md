@@ -37,7 +37,7 @@ You can see all packages as follow `sdkmanager --list`
 
     ```
     # sdkmanager --install [image name]
-    sdkmanager --install "system-images;android-23;default;x86_64"
+    sdkmanager --install "system-images;android-23;default;x86"
     ```
 Check the installation by `sdkmanager --list_installed`
 > You can uninstall packages as follow
@@ -56,7 +56,7 @@ avdmanager list devices
 1. Create an emulator
 ```
 # avdmanager create avd --name [emulator name] --package "[image name] -d [device name or id]"
-avdmanager create avd --name emulator1 --package "system-images;android-23;default;x86_64" -d 9
+avdmanager create avd --name emulator1 --package "system-images;android-23;default;x86" -d 9
 ```
 > You can see list of availabe avds by:
 ```
