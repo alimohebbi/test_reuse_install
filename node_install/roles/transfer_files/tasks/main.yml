@@ -1,0 +1,27 @@
+---
+  - name: copy archive files
+    copy: 
+      src: "{{item.src}}"
+      dest: "{{item.dest}}"
+    with_items:
+    - { src: '~/testreuse-craft.tar', dest: '~/testreuse-craft.tar' }
+    - { src: '~/models.zip', dest: '~/models.zip' }
+
+  - name: install unzip
+    become: true
+    apt:
+      name: unzip
+      state: latest
+
+  - name: Create a directory for models
+    ansible.builtin.file:
+      path: ~/models
+      state: directory
+
+
+  - name: unzip models
+    ansible.builtin.unarchive:
+      src: ~/models.zip
+      dest: ~/models
+      remote_src: yes
+

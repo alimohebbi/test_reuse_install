@@ -1,0 +1,8 @@
+---
+  - name: Load image from archive
+    docker_image:
+      name: testreuse-craft
+      push: no
+      load_path: testreuse-craft.tar
+      source: load
+
