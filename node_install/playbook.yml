@@ -1,6 +1,5 @@
----
-- name: Docker roles
-  hosts: all
+- hosts: all
   remote_user: usiusi
-  - roles:
-    - docker
+  name: Docker
+  roles:
+  - docker
