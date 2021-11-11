@@ -9,10 +9,16 @@
     pip:
       name: docker
 
+  - name: Restart service docker
+    ansible.builtin.service:
+     name: docker
+     state: restarted
+    become: true
+
   - name: Load image from archive
     docker_image:
       name: testreuse-craft
       push: no
-      load_path: testreuse-craft.tar
+      load_path: ~/testreuse-craft.tar
       source: load
-
+      state: present
