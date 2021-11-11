@@ -1,0 +1,3 @@
+algorithm,descriptors,training_set,word_embedding,MRR
+custom,intersection,empty,edit_distance,0.722191016
+craftdroid,union,standard,glove,0.680979207

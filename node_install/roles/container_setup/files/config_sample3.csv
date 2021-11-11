@@ -1,0 +1,4 @@
+algorithm,descriptors,training_set,word_embedding,MRR
+custom,union,standard,wm,0.776087053
+atm,atm,standard,bert,0.716390687
+craftdroid,union,standard,fast,0.669310221

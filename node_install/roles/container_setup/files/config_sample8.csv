@@ -1,0 +1,4 @@
+algorithm,descriptors,training_set,word_embedding,MRR
+custom,intersection,android,wm,0.753000643
+custom,craftdroid,blogs,fast,0.709648006
+craftdroid,union,empty,edit_distance,0.651155247

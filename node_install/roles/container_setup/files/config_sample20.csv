@@ -1,0 +1,3 @@
+algorithm,descriptors,training_set,word_embedding,MRR
+custom,atm,standard,glove,0.727418581
+craftdroid,craftdroid,standard,use,0.690365184

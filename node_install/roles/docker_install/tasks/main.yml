@@ -36,6 +36,7 @@
       - docker-ce
       - docker-ce-cli
       - containerd.io
+      - pip3
 
   - name: Add user to docker group
     become: true
@@ -48,6 +49,17 @@
       name: docker
       state: started
       enabled: yes
+
+  
+  - name: Install docker python package
+    pip:
+      name: docker
+
+  - name: Restart service docker
+    ansible.builtin.service:
+     name: docker
+     state: restarted
+    become: true
 
 
 

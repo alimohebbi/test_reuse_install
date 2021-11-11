@@ -1,0 +1,4 @@
+algorithm,descriptors,training_set,word_embedding,MRR
+craftdroid,atm,googleplay,w2v,0.734973379
+craftdroid,atm,googleplay,glove,0.699433463
+atm,craftdroid,empty,edit_distance,0.6002352

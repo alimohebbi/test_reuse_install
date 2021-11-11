@@ -1,0 +1,4 @@
+algorithm,descriptors,training_set,word_embedding,MRR
+custom,union,empty,jaccard,0.746854179
+atm,intersection,googleplay,fast,0.706564102
+atm,union,googleplay,glove,0.6370872

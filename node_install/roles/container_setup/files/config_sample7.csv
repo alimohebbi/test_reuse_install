@@ -1,0 +1,4 @@
+algorithm,descriptors,training_set,word_embedding,MRR
+custom,union,standard,nnlm,0.758780152
+atm,union,googleplay,wm,0.711545005
+atm,union,standard,bert,0.655497556

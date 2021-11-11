@@ -1,16 +1,4 @@
 ---
-  
-
-  - name: Install docker python package
-    pip:
-      name: docker
-
-  - name: Restart service docker
-    ansible.builtin.service:
-     name: docker
-     state: restarted
-    become: true
-
   - name: Load image from archive
     command: docker import ~/testreuse-craft.tar testreuse-craft
 
@@ -30,19 +18,40 @@
       command: bash -c "screen -dmS appium; screen -S appium -X stuff 'appium\n'"
       chdir: /root
 
-  - name: create server screen
+
+  - name: Create server screen
     community.docker.docker_container_exec:
       container: testreuse-craft
       command: bash -c "screen -dmS server; screen -S server -X stuff 'bash\n'"
       chdir: /root/test-reuse/matching-server
-    tags:
-      -debug
-
 
   - name: Run matching server
     community.docker.docker_container_exec:
       container: testreuse-craft
-      command: bash -c "screen -S server -X stuff 'source venv/bin/activate\n; python server.py'"
+      command: bash -c "screen -S server -X stuff 'source venv/bin/activate; python server.py\n'"
+
+
+  - name: Create CraftDroid screen
+    community.docker.docker_container_exec:
+      container: testreuse-craft
+      command: bash -c "screen -dmS craft; screen -S craft -X stuff 'bash\n'"
+      chdir: /root/test-reuse/Craftdroid-Modified
+
+  - name: Run CraftDroid
+    community.docker.docker_container_exec:
+      container: testreuse-craft
+      command: bash -c "screen -S server -X stuff 'source venv/bin/activate; python run_manager.py\n'"
+
+  - name: Copy config sample to host
+    copy:
+      src: "config_sample{{host_id}}.csv"
+      dest: ~/config_sample.csv
+    tags:
+      - debug
+
+
+  - name: Copy smaple config to docker
+    command: docker cp ~/config_sample.csv testreuse-craft:/root/test-reuse/Craftdroid-Modified/manager
     tags:
       - debug
 

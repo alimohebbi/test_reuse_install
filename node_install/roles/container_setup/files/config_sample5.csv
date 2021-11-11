@@ -1,0 +1,4 @@
+algorithm,descriptors,training_set,word_embedding,MRR
+atm,atm,blogs,wm,0.765481182
+craftdroid,atm,standard,fast,0.7144792
+craftdroid,craftdroid,standard,fast,0.662329862
