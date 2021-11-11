@@ -30,4 +30,24 @@
       command: bash -c "screen -dmS appium; screen -S appium -X stuff 'appium\n'"
       chdir: /root
     tags:
-      - debug
+
+    - name: create server screen
+      community.docker.docker_container_exec:
+        container: testreuse-craft
+        command: bash -c "screen -dmS server; screen -S server -X stuff 'bash\n'"
+        chdir: ~/test-reuse/matching-server
+      tags:
+        -debug
+
+
+    - name: Run matching server
+      community.docker.docker_container_exec:
+        container: testreuse-craft
+        command: bash -c "screen -S server -X stuff 'cd ~/test-reuse/matching-server; source venv/bin/activate\n; python server.py'"
+        chdir: ~/test-reuse/matching-server
+      tags:
+        - debug
+
+
+
+
