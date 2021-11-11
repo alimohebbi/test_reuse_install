@@ -5,17 +5,21 @@
   roles:
   - docker_install
   tags:
-    docker_install
+   - docker_install
 
 - hosts: all
   remote_user: usiusi
   name: Transfer zip files
   roles:
   - transfer_files
+  tags:
+   - transfer_files
 
 
 - hosts: all
   remote_user: usiusi
   name: Container Setup
   roles:
+  - container_setup
+  tags:
   - container_setup
