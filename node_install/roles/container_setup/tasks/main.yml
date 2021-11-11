@@ -34,7 +34,7 @@
     community.docker.docker_container_exec:
       container: testreuse-craft
       command: bash -c "screen -dmS server; screen -S server -X stuff 'bash\n'"
-      chdir: ~/test-reuse/matching-server
+      chdir: /root/test-reuse/matching-server
     tags:
       -debug
 
@@ -42,8 +42,7 @@
   - name: Run matching server
     community.docker.docker_container_exec:
       container: testreuse-craft
-      command: bash -c "screen -S server -X stuff 'cd ~/test-reuse/matching-server; source venv/bin/activate\n; python server.py'"
-      chdir: ~/test-reuse/matching-server
+      command: bash -c "screen -S server -X stuff 'source venv/bin/activate\n; python server.py'"
     tags:
       - debug
 
