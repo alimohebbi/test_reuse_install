@@ -15,7 +15,7 @@
 
   - name: Create a directory for models
     ansible.builtin.file:
-      path: ~/models
+      path: ~/
       state: directory
 
 
