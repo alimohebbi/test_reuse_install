@@ -47,16 +47,12 @@
       container: testreuse-craft
       command: bash -c "screen -dmS bert; screen -S bert -X stuff 'bash\n'"
       chdir: /root/test-reuse/matching-server
-    tags:
-      - debug
 
 
   - name: Run bert
     community.docker.docker_container_exec:
       container: testreuse-craft
       command: bash -c "screen -S bert -X stuff 'source venv-bert/bin/activate; bert-serving-start -model_dir /root/models/bert/uncased_L-12_H-768_A-12 -num_worker=1 -port 3333 -port_out 3334\n'"
-    tags:
-      - debug
 
 
   - name: Create server screen
