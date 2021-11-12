@@ -6,7 +6,7 @@
 
 
   - name: Load image from archive
-      command: docker import ~/testreuse-craft.tar testreuse-craft
+    command: docker import ~/testreuse-craft.tar testreuse-craft
 
   - name: Create a container
     docker_container:
