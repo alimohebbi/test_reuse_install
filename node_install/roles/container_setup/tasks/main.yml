@@ -47,11 +47,12 @@
       container: testreuse-craft
       command: bash -c "screen -dmS craft; screen -S craft -X stuff 'bash\n'"
       chdir: /root/test-reuse/Craftdroid-Modified
-
+    tags:
+      - debug
 
   - name: Run CraftDroid
     community.docker.docker_container_exec:
       container: testreuse-craft
-      command: bash -c "screen -S server -X stuff 'source venv/bin/activate; python run_manager.py\n'"
+      command: bash -c "screen -S craft -X stuff 'source venv/bin/activate; python run_manager.py\n'"
     tags:
       - debug
