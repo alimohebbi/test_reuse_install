@@ -1,11 +1,9 @@
 ---
-  - name: copy archive files
-    copy: 
-      src: "{{item.src}}"
-      dest: "{{item.dest}}"
-    with_items:
-    - { src: '~/testreuse-craft.tar', dest: '~/testreuse-craft.tar' }
-    - { src: '~/models.zip', dest: '~/models.zip' }
+  - name: Copy model archive to host
+    copy:
+      src: ~/models.zip
+      dest: ~/models.zip
+
 
   - name: install unzip
     become: true

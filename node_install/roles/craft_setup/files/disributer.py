@@ -9,6 +9,7 @@ def dist():
     for i, line in enumerate(lines):
         if i == 0:
             header = line
+            continue
         if not os.path.isfile(f'config_sample{(i % 25) + 1}.csv'):
             flag = True
         with open(f'config_sample{(i % 25) + 1}.csv', 'a+') as f:

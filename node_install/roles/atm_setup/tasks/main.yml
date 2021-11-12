@@ -1,13 +1,18 @@
 ---
+  - name: Copy image to host
+    copy:
+      src: ~/testreuse-atm.tar
+      dest: ~/testreuse-atm.tar
+
+
   - name: Load image from archive
-    command: docker import ~/testreuse-craft.tar testreuse-craft
+      command: docker import ~/testreuse-atm.tar testreuse-atm
 
   - name: Create a container
     docker_container:
-      name: testreuse-craft
-      image: testreuse-craft
+      name: testreuse-atm
+      image: testreuse-atm
       privileged: yes
-      network_mode: host
       volumes:
         - /home/usiusi/models:/root/models
       command: sleep infinity
@@ -20,33 +25,18 @@
 
 
   - name: Copy smaple config to docker
-    command: docker cp ~/config_sample.csv testreuse-craft:/root/test-reuse/Craftdroid-Modified/manager
-
-  - name: Create appium screen
-    community.docker.docker_container_exec:
-      container: testreuse-craft
-      command: bash -c "screen -dmS appium; screen -S appium -X stuff 'bash\n'"
-
-
-  - name: Run appium in the container
-    community.docker.docker_container_exec:
-      container: testreuse-craft
-      command: bash -c "screen -S appium -X stuff 'appium\n'"
-      chdir: /root
-
+    command: docker cp ~/config_sample.csv testreuse-atm:~/test-reuse/atm/atm_runner
 
   - name: Create bert screen
     community.docker.docker_container_exec:
-      container: testreuse-craft
+      container: testreuse-atm
       command: bash -c "screen -dmS bert; screen -S bert -X stuff 'bash\n'"
       chdir: /root/test-reuse/matching-server
-    tags:
-      - debug
 
 
   - name: Run bert
     community.docker.docker_container_exec:
-      container: testreuse-craft
+      container: testreuse-atm
       command: bash -c "screen -S bert -X stuff 'source venv-bert/bin/activate; bert-serving-start -model_dir /root/models/bert/uncased_L-12_H-768_A-12 -num_worker=1 -port 3333 -port_out 3334\n'"
     tags:
       - debug
@@ -54,25 +44,37 @@
 
   - name: Create server screen
     community.docker.docker_container_exec:
-      container: testreuse-craft
+      container: testreuse-atm
       command: bash -c "screen -dmS server; screen -S server -X stuff 'bash\n'"
       chdir: /root/test-reuse/matching-server
 
 
   - name: Run matching server
     community.docker.docker_container_exec:
-      container: testreuse-craft
+      container: testreuse-atm
       command: bash -c "screen -S server -X stuff 'source venv/bin/activate; python server.py\n'"
 
 
-  - name: Create CraftDroid screen
+  - name: Create emulator screen
     community.docker.docker_container_exec:
-      container: testreuse-craft
-      command: bash -c "screen -dmS craft; screen -S craft -X stuff 'bash\n'"
-      chdir: /root/test-reuse/Craftdroid-Modified
+      container: testreuse-atm
+      command: bash -c "screen -dmS emulator; screen -S emulator -X stuff 'bash\n'"
 
 
-  - name: Run CraftDroid
+  - name: Run Emulator
     community.docker.docker_container_exec:
-      container: testreuse-craft
-      command: bash -c "screen -S craft -X stuff 'source venv/bin/activate; python run_manager.py\n'"
+      container: testreuse-atm
+      command: bash -c "screen -S emulator -X stuff 'emulator -ports 5554,5555 -avd emulator1 -no-window -no-audio\n'"
+
+
+  - name: Create atm screen
+    community.docker.docker_container_exec:
+      container: testreuse-atm
+      command: bash -c "screen -dmS atm; screen -S atm -X stuff 'bash\n'"
+      chdir: ~/test-reuse/atm/atm_runner
+
+
+  - name: Prepare atm screen
+    community.docker.docker_container_exec:
+      container: testreuse-atm
+      command: bash -c "screen -S server -X stuff 'source venv/bin/activate\n'"

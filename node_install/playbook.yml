@@ -16,10 +16,18 @@
    - transfer_files
 
 
-- hosts: all
+- hosts: craft_host
   remote_user: usiusi
-  name: Container Setup
+  name: CraftDroid Setup
   roles:
-  - container_setup
+  - craft_setup
   tags:
-  - container_setup
+  - craft_setup
+
+- hosts: atm_host
+  remote_user: usiusi
+  name: ATM Setup
+  roles:
+    - atm_setup
+  tags:
+    - atm_setup
