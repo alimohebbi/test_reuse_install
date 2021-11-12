@@ -25,7 +25,7 @@
   - name: Create appium screen
     community.docker.docker_container_exec:
       container: testreuse-craft
-      command: bash -c "screen -dmS server; screen -S server -X stuff 'bash\n'"
+      command: bash -c "screen -dmS appium; screen -S appium -X stuff 'bash\n'"
     tags:
       - debug
 
