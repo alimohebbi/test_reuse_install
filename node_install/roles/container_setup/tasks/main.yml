@@ -22,12 +22,22 @@
   - name: Copy smaple config to docker
     command: docker cp ~/config_sample.csv testreuse-craft:/root/test-reuse/Craftdroid-Modified/manager
 
+  - name: Create appium screen
+    community.docker.docker_container_exec:
+      container: testreuse-craft
+      command: bash -c "screen -dmS server; screen -S server -X stuff 'bash\n'"
+    tags:
+      - debug
+
 
   - name: Run appium in the container
     community.docker.docker_container_exec:
       container: testreuse-craft
       command: bash -c "screen -dmS appium; screen -S appium -X stuff 'appium\n'"
       chdir: /root
+    tags:
+      - debug
+
 
   - name: Create server screen
     community.docker.docker_container_exec:
