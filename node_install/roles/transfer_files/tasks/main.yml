@@ -13,15 +13,9 @@
       name: unzip
       state: latest
 
-  - name: Create a directory for models
-    ansible.builtin.file:
-      path: ~/
-      state: directory
-
-
   - name: unzip models
     ansible.builtin.unarchive:
       src: ~/models.zip
-      dest: ~/models
+      dest: ~/
       remote_src: yes
 
