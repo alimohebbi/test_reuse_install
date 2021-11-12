@@ -16,7 +16,7 @@
    - transfer_files
 
 
-- hosts: craft_host
+- hosts: craft_hosts
   remote_user: usiusi
   name: CraftDroid Setup
   roles:
@@ -24,7 +24,7 @@
   tags:
   - craft_setup
 
-- hosts: atm_host
+- hosts: atm_hosts
   remote_user: usiusi
   name: ATM Setup
   roles:
