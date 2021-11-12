@@ -12,18 +12,29 @@
         - /home/usiusi/models:/root/models
       command: sleep infinity
 
+
+  - name: Copy config sample to host
+    copy:
+      src: "config_sample{{host_id}}.csv"
+      dest: ~/config_sample.csv
+
+
+  - name: Copy smaple config to docker
+    command: docker cp ~/config_sample.csv testreuse-craft:/root/test-reuse/Craftdroid-Modified/manager
+
+
   - name: Run appium in the container
     community.docker.docker_container_exec:
       container: testreuse-craft
       command: bash -c "screen -dmS appium; screen -S appium -X stuff 'appium\n'"
       chdir: /root
 
-
   - name: Create server screen
     community.docker.docker_container_exec:
       container: testreuse-craft
       command: bash -c "screen -dmS server; screen -S server -X stuff 'bash\n'"
       chdir: /root/test-reuse/matching-server
+
 
   - name: Run matching server
     community.docker.docker_container_exec:
@@ -37,24 +48,10 @@
       command: bash -c "screen -dmS craft; screen -S craft -X stuff 'bash\n'"
       chdir: /root/test-reuse/Craftdroid-Modified
 
+
   - name: Run CraftDroid
     community.docker.docker_container_exec:
       container: testreuse-craft
       command: bash -c "screen -S server -X stuff 'source venv/bin/activate; python run_manager.py\n'"
-
-  - name: Copy config sample to host
-    copy:
-      src: "config_sample{{host_id}}.csv"
-      dest: ~/config_sample.csv
     tags:
       - debug
-
-
-  - name: Copy smaple config to docker
-    command: docker cp ~/config_sample.csv testreuse-craft:/root/test-reuse/Craftdroid-Modified/manager
-    tags:
-      - debug
-
-
-
-
