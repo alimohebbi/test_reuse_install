@@ -26,8 +26,6 @@
     community.docker.docker_container_exec:
       container: testreuse-craft
       command: bash -c "screen -dmS appium; screen -S appium -X stuff 'bash\n'"
-    tags:
-      - debug
 
 
   - name: Run appium in the container
@@ -35,8 +33,6 @@
       container: testreuse-craft
       command: bash -c "screen -S appium -X stuff 'appium\n'"
       chdir: /root
-    tags:
-      - debug
 
 
   - name: Create bert screen
@@ -48,10 +44,10 @@
       - debug
 
 
-  - name: Run matching server
+  - name: Run bert
     community.docker.docker_container_exec:
       container: testreuse-craft
-      command: bash -c "screen -S server -X stuff 'source venv-bert/bin/activate; bert-serving-start -model_dir /root/models/bert/uncased_L-12_H-768_A-12 -num_worker=1 -port 3333 -port_out 3334\n'"
+      command: bash -c "screen -S bert -X stuff 'source venv-bert/bin/activate; bert-serving-start -model_dir /root/models/bert/uncased_L-12_H-768_A-12 -num_worker=1 -port 3333 -port_out 3334\n'"
     tags:
       - debug
 
