@@ -1,5 +1,4 @@
 ---
-
   - name: Copy image to host
     copy:
       src: ~/testreuse-craft.tar
