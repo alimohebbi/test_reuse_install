@@ -39,6 +39,23 @@
       - debug
 
 
+  - name: Create bert screen
+    community.docker.docker_container_exec:
+      container: testreuse-craft
+      command: bash -c "screen -dmS bert; screen -S bert -X stuff 'bash\n'"
+      chdir: /root/test-reuse/matching-server
+    tags:
+      - debug
+
+
+  - name: Run matching server
+    community.docker.docker_container_exec:
+      container: testreuse-craft
+      command: bash -c "screen -S server -X stuff 'source venv-bert/bin/activate; bert-serving-start -model_dir /root/models/bert/uncased_L-12_H-768_A-12 -num_worker=1 -port 3333 -port_out 3334\n'"
+    tags:
+      - debug
+
+
   - name: Create server screen
     community.docker.docker_container_exec:
       container: testreuse-craft
@@ -57,12 +74,9 @@
       container: testreuse-craft
       command: bash -c "screen -dmS craft; screen -S craft -X stuff 'bash\n'"
       chdir: /root/test-reuse/Craftdroid-Modified
-    tags:
-      - debug
+
 
   - name: Run CraftDroid
     community.docker.docker_container_exec:
       container: testreuse-craft
       command: bash -c "screen -S craft -X stuff 'source venv/bin/activate; python run_manager.py\n'"
-    tags:
-      - debug
