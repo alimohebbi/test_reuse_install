@@ -33,7 +33,7 @@
   - name: Run appium in the container
     community.docker.docker_container_exec:
       container: testreuse-craft
-      command: bash -c "screen -dmS appium; screen -S appium -X stuff 'appium\n'"
+      command: bash -c "screen -S appium -X stuff 'appium\n'"
       chdir: /root
     tags:
       - debug
