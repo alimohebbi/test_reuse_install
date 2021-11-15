@@ -3,6 +3,8 @@
     copy:
       src: ~/testreuse-atm.tar
       dest: ~/testreuse-atm.tar
+    tags:
+      - copy_image
 
 
   - name: Load image from archive
@@ -16,16 +18,19 @@
       volumes:
         - /home/usiusi/models:/root/models
       command: sleep infinity
-
+  tags:
+    - copy_image
 
   - name: Copy config sample to host
     copy:
       src: "config_sample{{host_id}}.csv"
       dest: ~/config_sample.csv
+    tags:
+      - debug
 
 
   - name: Copy smaple config to docker
-    command: docker cp ~/config_sample.csv testreuse-atm:~/test-reuse/atm/atm_runner
+    command: docker cp ~/config_sample.csv testreuse-atm:/root/test-reuse/atm/atm_runner
 
   - name: Create bert screen
     community.docker.docker_container_exec:
@@ -38,8 +43,7 @@
     community.docker.docker_container_exec:
       container: testreuse-atm
       command: bash -c "screen -S bert -X stuff 'source venv-bert/bin/activate; bert-serving-start -model_dir /root/models/bert/uncased_L-12_H-768_A-12 -num_worker=1 -port 3333 -port_out 3334\n'"
-    tags:
-      - debug
+
 
 
   - name: Create server screen

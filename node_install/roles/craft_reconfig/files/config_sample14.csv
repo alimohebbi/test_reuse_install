@@ -1,0 +1,4 @@
+algorithm,descriptors,training_set,word_embedding,MRR
+custom,intersection,blogs,wm,0.737152236
+custom,intersection,standard,bert,0.702102583
+atm,union,blogs,w2v,0.608454662

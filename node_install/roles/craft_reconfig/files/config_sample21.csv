@@ -1,0 +1,3 @@
+algorithm,descriptors,training_set,word_embedding,MRR
+custom,intersection,android,fast,0.726392231
+craftdroid,union,android,wm,0.687914653

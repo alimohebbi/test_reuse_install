@@ -1,0 +1,4 @@
+algorithm,descriptors,training_set,word_embedding,MRR
+custom,atm,empty,jaccard,0.738217364
+craftdroid,intersection,blogs,wm,0.702863533
+atm,craftdroid,blogs,fast,0.618721699

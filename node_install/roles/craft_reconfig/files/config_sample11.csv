@@ -1,0 +1,4 @@
+algorithm,descriptors,training_set,word_embedding,MRR
+atm,atm,android,glove,0.743761527
+atm,intersection,googleplay,w2v,0.705131524
+atm,craftdroid,googleplay,fast,0.630133322
