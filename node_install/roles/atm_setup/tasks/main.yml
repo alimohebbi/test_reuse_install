@@ -9,6 +9,8 @@
 
   - name: Load image from archive
     command: docker import ~/testreuse-atm.tar testreuse-atm
+    tags:
+      - copy_image
 
   - name: Create a container
     docker_container:
@@ -18,8 +20,8 @@
       volumes:
         - /home/usiusi/models:/root/models
       command: sleep infinity
-  tags:
-    - copy_image
+    tags:
+      - copy_image
 
   - name: Copy config sample to host
     copy:
