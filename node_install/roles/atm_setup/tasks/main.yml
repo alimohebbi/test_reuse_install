@@ -77,7 +77,7 @@
     community.docker.docker_container_exec:
       container: testreuse-atm
       command: bash -c "screen -dmS atm; screen -S atm -X stuff 'bash\n'"
-      chdir: ~/test-reuse/atm/atm_runner
+      chdir: /root/test-reuse/atm/atm_runner
 
 
   - name: Prepare atm screen
