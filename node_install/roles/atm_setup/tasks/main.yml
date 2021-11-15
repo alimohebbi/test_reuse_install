@@ -27,9 +27,6 @@
     copy:
       src: "config_sample{{host_id}}.csv"
       dest: ~/config_sample.csv
-    tags:
-      - debug
-
 
   - name: Copy smaple config to docker
     command: docker cp ~/config_sample.csv testreuse-atm:/root/test-reuse/atm/atm_runner
@@ -78,9 +75,15 @@
       container: testreuse-atm
       command: bash -c "screen -dmS atm; screen -S atm -X stuff 'bash\n'"
       chdir: /root/test-reuse/atm/atm_runner
+    tags:
+      - debug
+
 
 
   - name: Prepare atm screen
     community.docker.docker_container_exec:
       container: testreuse-atm
       command: bash -c "screen -S server -X stuff 'source venv/bin/activate\n'"
+    tags:
+      - debug
+
