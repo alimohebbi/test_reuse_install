@@ -1,15 +1,15 @@
 ---
-  - name: Restart CrafDroid container
-    docker_container:
-      name: testreuse-craft
-      state: started
-      restart: yes
+  - name: Stop CrafDroid container
+    command: docker container stop testreuse-craft
+
+
+  - name: Start CrafDroid container
+    command: docker container start testreuse-craft
 
   - name: Copy config sample to host
     copy:
       src: "config_sample{{host_id}}.csv"
       dest: ~/config_sample.csv
-
 
   - name: Copy smaple config to docker
     command: docker cp ~/config_sample.csv testreuse-craft:/root/test-reuse/Craftdroid-Modified/manager
@@ -40,6 +40,12 @@
       command: bash -c "screen -S bert -X stuff 'source venv-bert/bin/activate; bert-serving-start -model_dir /root/models/bert/uncased_L-12_H-768_A-12 -num_worker=1 -port 3333 -port_out 3334\n'"
 
 
+  - name: Wipe screens
+    community.docker.docker_container_exec:
+      container: testreuse-craft
+      command: bash -c "screen -wipe"
+
+
   - name: Create server screen
     community.docker.docker_container_exec:
       container: testreuse-craft
@@ -56,14 +62,14 @@
   - name: Create CraftDroid screen
     community.docker.docker_container_exec:
       container: testreuse-craft
-      command: bash -c "screen -dmS craft; screen -S craft -X stuff 'bash; git pull\n'"
+      command: bash -c "screen -dmS craft; screen -S craft -X stuff 'bash\n'"
       chdir: /root/test-reuse/Craftdroid-Modified
 
 
   - name: Replace config
     community.docker.docker_container_exec:
       container: testreuse-craft
-      command: bash -c "screen -S craft -X stuff 'cp config_template/config.yml .\n'"
+      command: bash -c "screen -S craft -X stuff 'git pull; cp config_template/config.yml .\n'"
 
 
   - name: Run CraftDroid

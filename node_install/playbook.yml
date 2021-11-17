@@ -3,33 +3,33 @@
   remote_user: usiusi
   name: Docker Installation
   roles:
-  - docker_install
+    - docker_install
   tags:
-   - docker_install
+    - docker_install
 
 - hosts: all
   remote_user: usiusi
   name: Transfer zip files
   roles:
-  - transfer_files
+    - transfer_files
   tags:
-   - transfer_files
+    - transfer_files
 
 - hosts: craft_hosts
   remote_user: usiusi
   name: CraftDroid Setup
   roles:
-  - craft_setup
+    - craft_setup
   tags:
-  - craft_setup
+    - craft_setup
 
 - hosts: craft_hosts
   remote_user: usiusi
   name: CraftDroid Setup
   roles:
-  - craft_reconfig
+    - craft_reconfig
   tags:
-  - craft_reconfig
+    - craft_reconfig
 
 - hosts: atm_hosts
   remote_user: usiusi

@@ -78,12 +78,13 @@
     tags:
       - debug
 
-
-
   - name: Prepare atm screen
     community.docker.docker_container_exec:
       container: testreuse-atm
-      command: bash -c "screen -S server -X stuff 'source venv/bin/activate\n'"
-    tags:
-      - debug
+      command: bash -c "screen -S atm -X stuff 'source venv/bin/activate\n'"
+
+  - name: Replace config
+    community.docker.docker_container_exec:
+      container: testreuse-atm
+      command: bash -c "screen -S atm -X stuff 'cp config_template/config.yml .\n'"
 

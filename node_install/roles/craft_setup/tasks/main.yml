@@ -3,10 +3,14 @@
     copy:
       src: ~/testreuse-craft.tar
       dest: ~/testreuse-craft.tar
+    tags:
+      - copy_image
 
 
   - name: Load image from archive
     command: docker import ~/testreuse-craft.tar testreuse-craft
+    tags:
+      - copy_image
 
   - name: Create a container
     docker_container:
