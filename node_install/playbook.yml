@@ -38,3 +38,11 @@
     - atm_setup
   tags:
     - atm_setup
+
+- hosts: atm_hosts
+  remote_user: usiusi
+  name: ATM Reconfig
+  roles:
+    - atm_reconfig
+  tags:
+    - atm_reconfig
