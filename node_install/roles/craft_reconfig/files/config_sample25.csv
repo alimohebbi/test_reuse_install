@@ -1,3 +1,6 @@
 algorithm,descriptors,training_set,word_embedding,MRR
-atm,intersection,standard,w2v,0.719731927
-atm,union,empty,jaccard,0.677339866
+custom,craftdroid,blogs,glove,0.718125412
+atm,intersection,empty,edit_distance,0.706664191
+atm,union,standard,nnlm,0.695644824
+craftdroid,intersection,standard,bert,0.6730612
+atm,craftdroid,googleplay,glove,0.635048509

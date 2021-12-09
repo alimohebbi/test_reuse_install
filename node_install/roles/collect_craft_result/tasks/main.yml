@@ -1,0 +1,30 @@
+---
+  - name: Remove existing dir
+    command: rm -r ~/generated{{host_id}}
+
+  - name: Copy generated test cases from the container
+    command: docker cp testreuse-craft:/root/test-reuse/Craftdroid-Modified/manager/generated ~/generated{{host_id}}
+
+
+  - name: zip the generated folder
+    community.general.archive:
+      path: ~/generated{{host_id}}
+      dest: ~/generated{{host_id}}.zip
+
+
+  - name: Fetch the generated zip
+    ansible.builtin.fetch:
+      src: ~/generated{{host_id}}.zip
+      dest: /Users/usiusi/Documents/Report/Test-Reuse/Reports/report14/
+      flat: yes
+
+
+  - name: Copy results from the container
+    command: docker cp testreuse-craft:/root/test-reuse/Craftdroid-Modified/manager/results.csv ~/results{{host_id}}.csv
+
+
+  - name: Fetch the results
+    ansible.builtin.fetch:
+      src: ~/results{{host_id}}.csv
+      dest: /Users/usiusi/Documents/Report/Test-Reuse/Reports/report14/
+      flat: yes

@@ -46,3 +46,11 @@
     - atm_reconfig
   tags:
     - atm_reconfig
+
+- hosts: craft_hosts
+  remote_user: usiusi
+  name: Collect craft results
+  roles:
+    - collect_craft_result
+  tags:
+    - collect_craft

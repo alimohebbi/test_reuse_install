@@ -1,4 +1,9 @@
 algorithm,descriptors,training_set,word_embedding,MRR
-custom,atm,standard,nnlm,0.76135351
-craftdroid,intersection,blogs,glove,0.712780967
-craftdroid,craftdroid,android,glove,0.659195893
+custom,union,googleplay,wm,0.77295361
+custom,atm,android,w2v,0.742662799
+custom,intersection,googleplay,fast,0.727342443
+craftdroid,intersection,googleplay,fast,0.715795621
+craftdroid,intersection,android,glove,0.704142736
+craftdroid,atm,standard,bert,0.689822069
+craftdroid,intersection,empty,jaccard,0.666736522
+atm,craftdroid,googleplay,w2v,0.623776707

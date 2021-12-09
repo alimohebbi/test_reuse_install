@@ -1,3 +1,8 @@
 algorithm,descriptors,training_set,word_embedding,MRR
-custom,intersection,empty,edit_distance,0.722191016
-craftdroid,union,standard,glove,0.680979207
+custom,craftdroid,blogs,wm,0.747915998
+atm,atm,standard,w2v,0.730700679
+atm,union,standard,use,0.718371042
+craftdroid,atm,standard,w2v,0.707339707
+craftdroid,union,googleplay,wm,0.696137379
+craftdroid,union,blogs,w2v,0.674185816
+custom,craftdroid,googleplay,w2v,0.744862989

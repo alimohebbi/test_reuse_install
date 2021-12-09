@@ -2,7 +2,7 @@ import os.path
 
 
 def dist():
-    file1 = open('config_sample.csv', 'r')
+    file1 = open('config_sample_new.csv', 'r')
     lines = file1.readlines()
     header = None
     flag = False
