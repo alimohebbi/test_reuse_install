@@ -1,0 +1,91 @@
+---
+  - name: Remove existing dir
+    command: rm -r ~/generated{{host_id}}
+    tags:
+      - delete_gen_host
+
+
+  - name: Copy generated test cases from the container
+    command: docker cp testreuse-atm:/root/test-reuse/atm/ATM-Modified/generated/ ~/generated{{host_id}}
+
+
+  - name: zip the generated folder
+    community.general.archive:
+      path: ~/generated{{host_id}}
+      dest: ~/generated{{host_id}}.zip
+
+
+  - name: Fetch the generated zip
+    ansible.builtin.fetch:
+      src: ~/generated{{host_id}}.zip
+      dest: /Users/usiusi/Documents/Report/Test-Reuse/Reports/report27/atm/
+      flat: yes
+
+
+  - name: Copy results from the container
+    command: docker cp testreuse-atm:/root/test-reuse/atm/atm_runner/results.csv ~/results{{host_id}}.csv
+
+
+  - name: Fetch the results
+    ansible.builtin.fetch:
+      src: ~/results{{host_id}}.csv
+      dest: /Users/usiusi/Documents/Report/Test-Reuse/Reports/report27/atm/
+      flat: yes
+
+
+
+#####
+  - name: Remove existing eval dir
+    command: rm -r ~/json_tests{{host_id}}
+    tags:
+      - delete_json
+
+  - name: Copy converted test cases from the container
+    command: docker cp testreuse-atm:/root/test-reuse/atm/test_attribute_extractor/data/json_tests/atm/generated/ ~/json_tests{{host_id}}
+    tags:
+      - json_test
+
+  - name: zip the json folder
+    community.general.archive:
+      path: ~/json_tests{{host_id}}
+      dest: ~/json_tests{{host_id}}.zip
+    tags:
+      - json_test
+
+  - name: Fetch the json zip
+    ansible.builtin.fetch:
+      src: ~/json_tests{{host_id}}.zip
+      dest: /Users/usiusi/Documents/Report/Test-Reuse/Reports/report27/atm/
+      flat: yes
+    tags:
+      - json_test
+
+
+
+  - name: Remove existing log dir
+    command: rm -r ~/logs{{host_id}}
+    tags:
+      - delete_log
+
+  - name: Copy converted logs from the container
+    command: docker cp testreuse-atm:/root/test-reuse/atm/test_attribute_extractor/data/output/logs/atm/generated ~/logs{{host_id}}
+    tags:
+      - json_test
+      - json_log
+
+  - name: zip the log folder
+    community.general.archive:
+      path: ~/logs{{host_id}}
+      dest: ~/logs{{host_id}}.zip
+    tags:
+      - json_test
+      - json_log
+
+  - name: Fetch the log zip
+    ansible.builtin.fetch:
+      src: ~/logs{{host_id}}.zip
+      dest: /Users/usiusi/Documents/Report/Test-Reuse/Reports/report27/atm/
+      flat: yes
+    tags:
+      - json_test
+      - json_log

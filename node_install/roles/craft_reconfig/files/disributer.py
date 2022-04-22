@@ -2,7 +2,7 @@ import os.path
 
 
 def dist():
-    file1 = open('config_sample_new.csv', 'r')
+    file1 = open('config_sample.csv', 'r')
     lines = file1.readlines()
     header = None
     flag = False
@@ -10,9 +10,9 @@ def dist():
         if i == 0:
             header = line
             continue
-        if not os.path.isfile(f'config_sample{(i % 25) + 1}.csv'):
+        if not os.path.isfile(f'config_sample{(i % 25)+1}.csv'):
             flag = True
-        with open(f'config_sample{(i % 25) + 1}.csv', 'a+') as f:
+        with open(f'config_sample{(i % 25)+1}.csv', 'a+') as f:
             if flag:
                 f.write(header)
                 flag = False

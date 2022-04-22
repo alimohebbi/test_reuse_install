@@ -1,9 +1,4 @@
-algorithm,descriptors,training_set,word_embedding,MRR
-custom,intersection,googleplay,wm,0.771865857
-atm,intersection,android,wm,0.726708901
-atm,atm,empty,jaccard,0.715738656
-craftdroid,atm,blogs,w2v,0.703462168
-craftdroid,intersection,blogs,w2v,0.688220305
-craftdroid,union,android,w2v,0.664955844
-atm,union,empty,edit_distance,0.622853125
-atm,union,standard,wm,0.692245526
+algorithm,descriptors,training_set,word_embedding,top1,MRR
+custom,craftdroid,standard,nnlm,207,0.751732256
+atm,intersection,blogs,fast,168,0.700894211
+adaptdroid,union,googleplay,w2v,159,0.63622568

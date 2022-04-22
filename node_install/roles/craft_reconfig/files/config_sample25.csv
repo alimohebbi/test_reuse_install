@@ -1,6 +1,3 @@
-algorithm,descriptors,training_set,word_embedding,MRR
-custom,craftdroid,blogs,glove,0.718125412
-atm,intersection,empty,edit_distance,0.706664191
-atm,union,standard,nnlm,0.695644824
-craftdroid,intersection,standard,bert,0.6730612
-atm,craftdroid,googleplay,glove,0.635048509
+algorithm,descriptors,training_set,word_embedding,top1,MRR
+craftdroid,atm,android,glove,180,0.713065646
+adaptdroid,intersection,standard,nnlm,178,0.65531943

@@ -25,6 +25,22 @@
 
 - hosts: craft_hosts
   remote_user: usiusi
+  name: craft redeploy
+  roles:
+    - craft_redeploy
+  tags:
+    - craft_redeploy
+
+- hosts: craft_hosts
+  remote_user: usiusi
+  name: CraftDroid Update
+  roles:
+    - craft_update
+  tags:
+    - craft_update
+
+- hosts: craft_hosts
+  remote_user: usiusi
   name: CraftDroid Setup
   roles:
     - craft_reconfig
@@ -54,3 +70,13 @@
     - collect_craft_result
   tags:
     - collect_craft
+
+- hosts: atm_hosts
+  remote_user: usiusi
+  name: Collect atm results
+  roles:
+    - collect_atm_result
+  tags:
+    - collect_atm
+
+

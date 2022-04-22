@@ -1,6 +1,8 @@
 ---
   - name: Remove existing dir
     command: rm -r ~/generated{{host_id}}
+    tags:
+      - delete_gen_host
 
   - name: Copy generated test cases from the container
     command: docker cp testreuse-craft:/root/test-reuse/Craftdroid-Modified/manager/generated ~/generated{{host_id}}
@@ -15,7 +17,7 @@
   - name: Fetch the generated zip
     ansible.builtin.fetch:
       src: ~/generated{{host_id}}.zip
-      dest: /Users/usiusi/Documents/Report/Test-Reuse/Reports/report14/
+      dest: /Users/usiusi/Documents/Report/Test-Reuse/Reports/report27/craft/
       flat: yes
 
 
@@ -26,5 +28,35 @@
   - name: Fetch the results
     ansible.builtin.fetch:
       src: ~/results{{host_id}}.csv
-      dest: /Users/usiusi/Documents/Report/Test-Reuse/Reports/report14/
+      dest: /Users/usiusi/Documents/Report/Test-Reuse/Reports/report27/craft/
       flat: yes
+
+
+
+################## logs ##################
+
+  - name: Remove existing dir
+    command: rm -r ~/query_log{{host_id}}
+    tags:
+      - delete_log_host
+      - qlogs
+
+  - name: Copy generated qlogs from the container
+    command: docker cp testreuse-craft:/root/test-reuse/matching-server/query_log ~/query_log{{host_id}}
+    tags:
+      - qlogs
+
+  - name: zip the generated folder
+    community.general.archive:
+      path: ~/query_log{{host_id}}
+      dest: ~/query_log{{host_id}}.zip
+    tags:
+      - qlogs
+
+  - name: Fetch the generated zip
+    ansible.builtin.fetch:
+      src: ~/query_log{{host_id}}.zip
+      dest: /Users/usiusi/Documents/Report/Test-Reuse/Reports/report27/craft/
+      flat: yes
+    tags:
+      - qlogs

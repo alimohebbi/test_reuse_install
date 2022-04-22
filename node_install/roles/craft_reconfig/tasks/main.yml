@@ -5,6 +5,8 @@
 
   - name: Start CrafDroid container
     command: docker container start testreuse-craft
+    tags:
+      - qlogs
 
   - name: Copy config sample to host
     copy:
@@ -14,12 +16,12 @@
   - name: Copy smaple config to docker
     command: docker cp ~/config_sample.csv testreuse-craft:/root/test-reuse/Craftdroid-Modified/manager
 
-  - name: Remove generated
-    community.docker.docker_container_exec:
-      container: testreuse-craft
-      command: bash -c "rm -r /root/test-reuse/Craftdroid-Modified/manager/generated/*"
-    tags:
-      - delete_gen
+#  - name: Remove generated
+#    community.docker.docker_container_exec:
+#      container: testreuse-craft
+#      command: bash -c "rm -r /root/test-reuse/Craftdroid-Modified/manager/generated/*"
+#    tags:
+#      - delete_gen
 
 
   - name: Wipe screens
@@ -27,20 +29,22 @@
       container: testreuse-craft
       command: bash -c "screen -wipe"
     tags:
-      - wipe_screen
+      - screen_wipe
 
   - name: Create appium screen
     community.docker.docker_container_exec:
       container: testreuse-craft
       command: bash -c "screen -dmS appium; screen -S appium -X stuff 'bash\n'"
-
+    tags:
+      - appium
 
   - name: Run appium in the container
     community.docker.docker_container_exec:
       container: testreuse-craft
       command: bash -c "screen -S appium -X stuff 'appium\n'"
       chdir: /root
-
+    tags:
+      - appium
 
   - name: Create bert screen
     community.docker.docker_container_exec:
@@ -53,8 +57,6 @@
     community.docker.docker_container_exec:
       container: testreuse-craft
       command: bash -c "screen -S bert -X stuff 'source venv-bert/bin/activate; bert-serving-start -model_dir /root/models/bert/uncased_L-12_H-768_A-12 -num_worker=1 -port 3333 -port_out 3334\n'"
-
-
 
 
   - name: Create server screen
@@ -80,7 +82,8 @@
   - name: Replace config
     community.docker.docker_container_exec:
       container: testreuse-craft
-      command: bash -c "screen -S craft -X stuff 'git pull; cp config_template/config.yml .\n'"
+      command: bash -c "screen -S craft -X stuff 'git pull; cp config_template/config.yml .;  cp config_template/migrations-full.csv manager/migrations.csv  \n'"
+#      command: bash -c "screen -S craft -X stuff 'git pull; cp config_template/config.yml .; cp config_template/results.csv manager/; cp config_template/migrations-full.csv manager/migrations.csv \n'"
 
 
   - name: Run CraftDroid

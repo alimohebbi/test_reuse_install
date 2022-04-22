@@ -1,0 +1,133 @@
+---
+- name: Stop CrafDroid container
+  command: docker container stop testreuse-craft
+
+- name: Remove CrafDroid container
+  command: docker container rm testreuse-craft
+
+
+- name: Create a container
+  docker_container:
+    name: testreuse-craft
+    image: testreuse-craft
+    privileged: yes
+    network_mode: host
+    volumes:
+      - /home/usiusi/models:/root/models
+    command: sleep infinity
+
+
+- name: Create emulator screen
+  community.docker.docker_container_exec:
+    container: testreuse-craft
+    command: bash -c "screen -dmS emulator; screen -S emulator -X stuff 'bash\n'"
+  tags:
+    - emulator
+
+
+
+## apks
+
+- name: Copy apks to host
+  copy:
+    src: /Users/usiusi/Documents/Repositories/Craftdroid/subject_apps/atm_apks.zip
+    dest: ~/
+
+- name: Run emulator
+  community.docker.docker_container_exec:
+    container: testreuse-craft
+    command: bash -c "screen -S emulator -X stuff 'emulator -ports 5554,5555 -avd emulator1 -no-window -no-audio -no-snapshot-load\n'"
+  tags:
+    - emulator
+- name: Copy apks in docker
+  command: docker cp ~/atm_apks.zip testreuse-craft:/root/test-reuse/atm_apks.zip
+
+- name: unzip apks
+  community.docker.docker_container_exec:
+    container: testreuse-craft
+    command: bash -c "unzip atm_apks.zip"
+    chdir: /root/test-reuse
+
+- name: Sleep for 50 seconds and continue with play
+  wait_for:
+    timeout: 50
+
+- name: install atm apks
+  community.docker.docker_container_exec:
+    container: testreuse-craft
+    command: bash -c "source ~/.profile; ./install_apks.sh; ./install_apks.sh"
+    chdir: /root/test-reuse/atm_apks
+
+- name: Kill emulator
+  community.docker.docker_container_exec:
+    container: testreuse-craft
+    command: bash -c "adb -s emulator-5554 emu kill; screen -X -S emulator quit"
+
+### craftdroid
+
+
+- name: Stash Craftdroid
+  community.docker.docker_container_exec:
+    container: testreuse-craft
+    command: bash -c "git add --all; git stash; git stash drop"
+    chdir: /root/test-reuse/Craftdroid-Modified
+
+
+- name: Git pull
+  community.docker.docker_container_exec:
+    container: testreuse-craft
+    command: bash -c "git pull"
+    chdir: /root/test-reuse/Craftdroid-Modified
+
+
+- name: Copy config
+  community.docker.docker_container_exec:
+    container: testreuse-craft
+    command: bash -c "cp config_template/migrations-atm.csv manager/migrations.csv; cp config_template/results.csv manager"
+    chdir: /root/test-reuse/Craftdroid-Modified
+
+
+### Attribute
+- name: Remove attribute extractor
+  community.docker.docker_container_exec:
+    container: testreuse-craft
+    command: bash -c "rm -r test_attribute_extractor"
+    chdir: /root/test-reuse/Craftdroid-Modified/
+
+
+- name: Git clone
+  community.docker.docker_container_exec:
+    container: testreuse-craft
+    command: bash -c "git clone git@github.com:alimohebbi/test_attribute_extractor.git"
+    chdir: /root/test-reuse/Craftdroid-Modified/
+
+
+- name: Copy config
+  community.docker.docker_container_exec:
+    container: testreuse-craft
+    command: bash -c "cp config_template/config.yml ."
+    chdir: /root/test-reuse/Craftdroid-Modified/test_attribute_extractor
+
+## Server update
+
+
+- name: Remove semantic matching server
+  community.docker.docker_container_exec:
+    container: testreuse-craft
+    command: bash -c "git add --all; git stash; git stash drop"
+    chdir: /root/test-reuse/matching-server
+
+
+- name: Git pull
+  community.docker.docker_container_exec:
+    container: testreuse-craft
+    command: bash -c "git pull"
+    chdir: /root/test-reuse/matching-server
+
+
+- name: Copy config
+  community.docker.docker_container_exec:
+    container: testreuse-craft
+    command: bash -c "cp config_template/config.yml ."
+    chdir: /root/test-reuse/matching-server
+

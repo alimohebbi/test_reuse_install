@@ -1,0 +1,146 @@
+---
+  - name: Stop CrafDroid container
+    command: docker container stop testreuse-craft
+
+
+  - name: Start CrafDroid container
+    command: docker container start testreuse-craft
+
+  - name: Wipe screens
+    community.docker.docker_container_exec:
+      container: testreuse-craft
+      command: bash -c "screen -wipe"
+    tags:
+      - screen_wipe
+
+  - name: Create emulator screen
+    community.docker.docker_container_exec:
+      container: testreuse-craft
+      command: bash -c "screen -dmS emulator; screen -S emulator -X stuff 'bash\n'"
+    tags:
+      - emulator
+
+  - name: Run emulator
+    community.docker.docker_container_exec:
+      container: testreuse-craft
+      command: bash -c "screen -S emulator -X stuff 'emulator -ports 5554,5555 -avd emulator1 -no-window -no-audio -no-snapshot-load\n'"
+    tags:
+      - emulator
+
+  - name: Remove a43
+    community.docker.docker_container_exec:
+      container: testreuse-craft
+      command: bash -c "grep -v a43 ~/test-reuse/Craftdroid-Modified/manager/results.csv > tmpfile && mv tmpfile ~/test-reuse/Craftdroid-Modified/manager/results.csv"
+
+  - name: Create appium screen
+    community.docker.docker_container_exec:
+      container: testreuse-craft
+      command: bash -c "screen -dmS appium; screen -S appium -X stuff 'bash\n'"
+    tags:
+      - appium
+
+  - name: Run appium in the container
+    community.docker.docker_container_exec:
+      container: testreuse-craft
+      command: bash -c "screen -S appium -X stuff 'appium\n'"
+      chdir: /root
+    tags:
+      - appium
+###
+#  - name: Remove attribute extractor
+#    community.docker.docker_container_exec:
+#      container: testreuse-craft
+#      command: bash -c "rm -r test_attribute_extractor"
+#      chdir: /root/test-reuse/Craftdroid-Modified/
+#
+#
+#  - name: Git clone
+#    community.docker.docker_container_exec:
+#      container: testreuse-craft
+#      command: bash -c "git clone git@github.com:alimohebbi/test_attribute_extractor.git"
+#      chdir: /root/test-reuse/Craftdroid-Modified/
+
+
+#  - name: Copy config
+#    community.docker.docker_container_exec:
+#      container: testreuse-craft
+#      command: bash -c "cp config_template/config.yml ."
+#      chdir: /root/test-reuse/Craftdroid-Modified/test_attribute_extractor
+
+#  - name: Move venvs out
+#    community.docker.docker_container_exec:
+#      container: testreuse-craft
+#      command: bash -c "mv matching-server/venv .; mv matching-server/venv-bert . "
+#      chdir: /root/test-reuse
+#
+#
+#  - name: Remove semantic matching server
+#    community.docker.docker_container_exec:
+#      container: testreuse-craft
+#      command: bash -c "rm -r matching-server"
+#      chdir: /root/test-reuse
+#
+#
+#  - name: Git clone
+#    community.docker.docker_container_exec:
+#      container: testreuse-craft
+#      command: bash -c "git clone  https://star-rep.inf.usi.ch/Mohebbi/matching-server.git"
+#      chdir: /root/test-reuse
+#
+#  - name: Copy config
+#    community.docker.docker_container_exec:
+#      container: testreuse-craft
+#      command: bash -c "cp config_template/config.yml ."
+#      chdir: /root/test-reuse/matching-server
+#
+#  - name: Move venvs in
+#    community.docker.docker_container_exec:
+#      container: testreuse-craft
+#      command: bash -c "mv venv matching-server; mv venv-bert matching-server "
+#      chdir: /root/test-reuse
+
+
+
+
+#  - name: Remove results
+#    community.docker.docker_container_exec:
+#      container: testreuse-craft
+#      command: bash -c "rm results.csv"
+#      chdir: /root/test-reuse/Craftdroid-Modified/manager
+
+#  - name: Add empty results
+#    community.docker.docker_container_exec:
+#      container: testreuse-craft
+#      command: bash -c "cp config_template/results.csv manager"
+#      chdir: /root/test-reuse/Craftdroid-Modified/
+
+
+
+#  - name: Copy apks.zip
+#    copy:
+#      src: /Users/usiusi/Documents/Repositories/Craftdroid/subject_apps/atm_apks.zip
+#      dest: ~/atm_apks.zip
+#
+#
+#  - name: Copy apks in docker
+#    command: docker cp ~/atm_apks.zip testreuse-craft:/root/test-reuse/atm_apks.zip
+#
+#  - name: unzip apks
+#    community.docker.docker_container_exec:
+#      container: testreuse-craft
+#      command: bash -c "unzip atm_apks.zip"
+#      chdir: /root/test-reuse
+
+
+#  - name: creat venv
+#    community.docker.docker_container_exec:
+#      container: testreuse-craft
+#      command: bash -c "virtualenv -p python3 venv; source venv/bin/activate; pip install -r requirements.txt; deactivate"
+#      chdir: /root/test-reuse/matching-server
+#
+#
+#  - name: creat venv-bert
+#    community.docker.docker_container_exec:
+#      container: testreuse-craft
+#      command: bash -c "virtualenv -p python3 venv-bert; source venv-bert/bin/activate; pip install -r  requierments_bert.txt; deactivate"
+#      chdir: /root/test-reuse/matching-server

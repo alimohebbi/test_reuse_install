@@ -1,8 +1,3 @@
-algorithm,descriptors,training_set,word_embedding,MRR
-custom,craftdroid,blogs,wm,0.747915998
-atm,atm,standard,w2v,0.730700679
-atm,union,standard,use,0.718371042
-craftdroid,atm,standard,w2v,0.707339707
-craftdroid,union,googleplay,wm,0.696137379
-craftdroid,union,blogs,w2v,0.674185816
-custom,craftdroid,googleplay,w2v,0.744862989
+algorithm,descriptors,training_set,word_embedding,top1,MRR
+custom,union,blogs,glove,180,0.715058713
+adaptdroid,atm,blogs,w2v,172,0.65829432
