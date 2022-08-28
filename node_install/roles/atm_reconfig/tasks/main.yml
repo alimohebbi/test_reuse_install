@@ -5,6 +5,8 @@
 
   - name: Start ATM container
     command: docker container start testreuse-atm
+    tags:
+      - atm_start
 
   - name: Copy config sample to host
     copy:

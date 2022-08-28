@@ -17,7 +17,7 @@
   - name: Fetch the generated zip
     ansible.builtin.fetch:
       src: ~/generated{{host_id}}.zip
-      dest: /Users/usiusi/Documents/Report/Test-Reuse/Reports/report27/craft/
+      dest: /Users/usiusi/Documents/Report/Test-Reuse/Reports/report31/craft/
       flat: yes
 
 
@@ -28,7 +28,7 @@
   - name: Fetch the results
     ansible.builtin.fetch:
       src: ~/results{{host_id}}.csv
-      dest: /Users/usiusi/Documents/Report/Test-Reuse/Reports/report27/craft/
+      dest: /Users/usiusi/Documents/Report/Test-Reuse/Reports/report31/craft/
       flat: yes
 
 
@@ -56,7 +56,7 @@
   - name: Fetch the generated zip
     ansible.builtin.fetch:
       src: ~/query_log{{host_id}}.zip
-      dest: /Users/usiusi/Documents/Report/Test-Reuse/Reports/report27/craft/
+      dest: /Users/usiusi/Documents/Report/Test-Reuse/Reports/report31/craft/
       flat: yes
     tags:
       - qlogs

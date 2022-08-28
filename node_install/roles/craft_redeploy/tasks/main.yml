@@ -22,12 +22,9 @@
     container: testreuse-craft
     command: bash -c "screen -dmS emulator; screen -S emulator -X stuff 'bash\n'"
   tags:
-    - emulator
+    - run_emulator
 
-
-
-## apks
-
+####### apks
 - name: Copy apks to host
   copy:
     src: /Users/usiusi/Documents/Repositories/Craftdroid/subject_apps/atm_apks.zip
@@ -38,7 +35,8 @@
     container: testreuse-craft
     command: bash -c "screen -S emulator -X stuff 'emulator -ports 5554,5555 -avd emulator1 -no-window -no-audio -no-snapshot-load\n'"
   tags:
-    - emulator
+    - run_emulator
+
 - name: Copy apks in docker
   command: docker cp ~/atm_apks.zip testreuse-craft:/root/test-reuse/atm_apks.zip
 
@@ -62,9 +60,10 @@
   community.docker.docker_container_exec:
     container: testreuse-craft
     command: bash -c "adb -s emulator-5554 emu kill; screen -X -S emulator quit"
+  tags:
+    - kill_emulator
 
-### craftdroid
-
+#### craftdroid
 
 - name: Stash Craftdroid
   community.docker.docker_container_exec:
@@ -86,8 +85,8 @@
     command: bash -c "cp config_template/migrations-atm.csv manager/migrations.csv; cp config_template/results.csv manager"
     chdir: /root/test-reuse/Craftdroid-Modified
 
+#### Attribute
 
-### Attribute
 - name: Remove attribute extractor
   community.docker.docker_container_exec:
     container: testreuse-craft
@@ -108,8 +107,7 @@
     command: bash -c "cp config_template/config.yml ."
     chdir: /root/test-reuse/Craftdroid-Modified/test_attribute_extractor
 
-## Server update
-
+### Server update
 
 - name: Remove semantic matching server
   community.docker.docker_container_exec:
@@ -117,17 +115,52 @@
     command: bash -c "git add --all; git stash; git stash drop"
     chdir: /root/test-reuse/matching-server
 
-
 - name: Git pull
   community.docker.docker_container_exec:
     container: testreuse-craft
     command: bash -c "git pull"
     chdir: /root/test-reuse/matching-server
 
-
 - name: Copy config
   community.docker.docker_container_exec:
     container: testreuse-craft
     command: bash -c "cp config_template/config.yml ."
     chdir: /root/test-reuse/matching-server
+
+###### Taking the results back
+
+- name: Copy results to the docker
+  command: docker cp ~/results{{host_id}}.csv testreuse-craft:/root/test-reuse/Craftdroid-Modified/manager/results.csv
+
+- name: Remove qlogs
+  community.docker.docker_container_exec:
+    container: testreuse-craft
+    command: bash -c "rm -r /root/test-reuse/matching-server/query_log"
+  tags:
+    - delete_qlogs
+
+- name: Copy logs to the docker
+  command: docker cp ~/query_log{{host_id}} testreuse-craft:/root/test-reuse/matching-server/
+
+- name: Rename qlogs
+  community.docker.docker_container_exec:
+    container: testreuse-craft
+    command: bash -c "mv /root/test-reuse/matching-server/query_log{{host_id}} /root/test-reuse/matching-server/query_log"
+
+- name: Remove generated
+  community.docker.docker_container_exec:
+    container: testreuse-craft
+    command: bash -c "rm -r /root/test-reuse/Craftdroid-Modified/manager/generated"
+  tags:
+    - delete_gen
+
+- name: Copy generated to the docker
+  command: docker cp ~/generated{{host_id}} testreuse-craft:/root/test-reuse/Craftdroid-Modified/manager
+
+
+- name: Rename generated
+  community.docker.docker_container_exec:
+    container: testreuse-craft
+    command: bash -c "mv /root/test-reuse/Craftdroid-Modified/manager/generated{{host_id}} /root/test-reuse/Craftdroid-Modified/manager/generated"
+
 

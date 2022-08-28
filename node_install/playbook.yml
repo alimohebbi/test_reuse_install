@@ -69,7 +69,7 @@
   roles:
     - collect_craft_result
   tags:
-    - collect_craft
+    - craft_collect
 
 - hosts: atm_hosts
   remote_user: usiusi
@@ -77,6 +77,6 @@
   roles:
     - collect_atm_result
   tags:
-    - collect_atm
+    - atm_collect
 
 

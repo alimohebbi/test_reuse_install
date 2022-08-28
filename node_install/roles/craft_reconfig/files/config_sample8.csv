@@ -2,3 +2,4 @@ algorithm,descriptors,training_set,word_embedding,top1,MRR
 custom,craftdroid,blogs,wm,199,0.747915998
 craftdroid,intersection,standard,w2v,173,0.698873314
 atm,craftdroid,blogs,glove,140,0.630878242
+random,union,empty,random,217,0.7676493

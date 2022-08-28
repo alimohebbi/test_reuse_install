@@ -1,3 +1,4 @@
 algorithm,descriptors,training_set,word_embedding,top1,MRR
 craftdroid,intersection,googleplay,w2v,182,0.720522811
 atm,craftdroid,standard,nnlm,164,0.703984045
+perfect,union,empty,edit_distance,217,0.7676493

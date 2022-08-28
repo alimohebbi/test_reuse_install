@@ -2,3 +2,4 @@ algorithm,descriptors,training_set,word_embedding,top1,MRR
 custom,atm,android,fast,193,0.742275097
 craftdroid,craftdroid,googleplay,wm,173,0.6958901
 adaptdroid,union,empty,jaccard,152,0.62677891
+random,union,empty,random,217,0.7676493

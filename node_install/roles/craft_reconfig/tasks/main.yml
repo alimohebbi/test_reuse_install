@@ -1,12 +1,23 @@
 ---
   - name: Stop CrafDroid container
     command: docker container stop testreuse-craft
+    tags:
+      - stop_c
 
 
   - name: Start CrafDroid container
     command: docker container start testreuse-craft
     tags:
       - qlogs
+      - start_c
+
+  - name: Remove emulator lock if exist
+    community.docker.docker_container_exec:
+      container: testreuse-craft
+      command: rm /root/.android/avd/emulator1.avd/hardware-qemu.ini.lock
+    tags:
+      - remove_lock
+
 
   - name: Copy config sample to host
     copy:
